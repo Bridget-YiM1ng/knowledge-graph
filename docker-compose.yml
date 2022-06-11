@@ -1,9 +1,9 @@
-
-   
 version: "3.8"
 services:
   neo4j:
-    image: neo4j:4.4.3
+    build:
+      dockerfile: neo4j/Dockerfile
+      context: .
     volumes:
       - type: bind
         source: ./data/neo4j/data
@@ -24,3 +24,4 @@ services:
       - NEO4JLABS_PLUGINS=["graph-data-science", "apoc"]
       - NEO4J_dbms_security_procedures_whitelist=gds.*, apoc.*
       - NEO4J_dbms_security_procedures_unrestricted=gds.*, apoc.*
+    entrypoint: ./entrypoint.sh
